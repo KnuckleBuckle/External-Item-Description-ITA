@@ -133,9 +133,15 @@ function EID:addCollectible(id, description, itemName, language)
 	local modName = EID._currentMod
 	-- Glitched Items exception so they don't have a mod name
 	if id > 4294960000 then modName = nil end
+	local fullID = "5.100." .. id
+	if EID.FullyAutomatedDescriptions[fullID] then
+		EID.FullyAutomatedDescriptions[fullID] = nil -- remove vanilla item id from the modular desc list, since it got overriden by this function.
+	end
 	EID:CreateDescriptionTableIfMissing("custom", language)
-	EID.descriptions[language].custom["5.100." .. id] = {id, itemName, description, modName}
-	EID.ItemNames[language]["5.100." .. id] = itemName
+	EID.descriptions[language].custom[fullID] = {id, itemName, description, modName}
+	if itemName then
+		EID.ItemNames[language][fullID] = itemName
+	end
 end
 
 ---Adds a description for a trinket.
@@ -150,9 +156,15 @@ function EID:addTrinket(id, description, itemName, language)
 		EID:WriteErrorMsg("Trying to add trinket description to id = -1, which is not allowed! (Name: "..tostring(itemName).."; Description: "..tostring(description)..")")
 		return
 	end
+	local fullID = "5.350." .. id
+	if EID.FullyAutomatedDescriptions[fullID] then
+		EID.FullyAutomatedDescriptions[fullID] = nil -- remove vanilla item id from the modular desc list, since it got overriden by this function.
+	end
 	EID:CreateDescriptionTableIfMissing("custom", language)
-	EID.descriptions[language].custom["5.350." .. id] = {id, itemName, description, EID._currentMod}
-	EID.ItemNames[language]["5.350." .. id] = itemName
+	EID.descriptions[language].custom[fullID] = {id, itemName, description, EID._currentMod}
+	if itemName then
+		EID.ItemNames[language][fullID] = itemName
+	end
 end
 
 ---Adds character specific information, which can be viewed in the Item Reminder
@@ -245,9 +257,15 @@ function EID:addCard(id, description, itemName, language)
 		EID:WriteErrorMsg("Trying to add card description to id = -1, which is not allowed! (Name: "..tostring(itemName).."; Description: "..tostring(description)..")")
 		return
 	end
+	local fullID = "5.300." .. id
+	if EID.FullyAutomatedDescriptions[fullID] then
+		EID.FullyAutomatedDescriptions[fullID] = nil -- remove vanilla item id from the modular desc list, since it got overriden by this function.
+	end
 	EID:CreateDescriptionTableIfMissing("custom", language)
-	EID.descriptions[language].custom["5.300." .. id] = {id, itemName, description, EID._currentMod}
-	EID.ItemNames[language]["5.300." .. id] = itemName
+	EID.descriptions[language].custom[fullID] = {id, itemName, description, EID._currentMod}
+	if itemName then
+		EID.ItemNames[language][fullID] = itemName
+	end
 end
 
 -- DEPRECATED! Does nothing! Don't use!
@@ -268,14 +286,20 @@ function EID:addPill(id, description, itemName, language)
 		EID:WriteErrorMsg("Trying to add pill description to id = -1, which is not allowed! (Name: "..tostring(itemName).."; Description: "..tostring(description)..")")
 		return
 	end
+	local fullID = "5.70." .. id
+	if EID.FullyAutomatedDescriptions[fullID] then
+		EID.FullyAutomatedDescriptions[fullID] = nil -- remove vanilla item id from the modular desc list, since it got overriden by this function.
+	end
 	EID:CreateDescriptionTableIfMissing("pills", language)
 	EID:CreateDescriptionTableIfMissing("horsepills", language)
-	EID.descriptions[language].pills[id+1] = {id, itemName, description, EID._currentMod}
+	EID.descriptions[language].pills[id + 1] = {id, itemName, description, EID._currentMod}
 	-- Default the horsepill to the same description as the base pill, for mods that only define the base pill
-	if EID.isRepentance and EID.descriptions[language].horsepills[id+1] == nil then
-		EID.descriptions[language].horsepills[id+1] = {id, itemName, description, EID._currentMod}
+	if EID.isRepentance and EID.descriptions[language].horsepills[id + 1] == nil then
+		EID.descriptions[language].horsepills[id + 1] = {id, itemName, description, EID._currentMod}
 	end
-	EID.ItemNames[language]["5.70." .. id] = itemName
+	if itemName then
+		EID.ItemNames[language][fullID] = itemName
+	end
 end
 
 ---Adds a horsepill-specific description for a PillEffect
@@ -291,9 +315,15 @@ function EID:addHorsePill(id, description, itemName, language)
 		EID:WriteErrorMsg("Trying to add horsepill description to id = -1, which is not allowed! (Name: "..tostring(itemName).."; Description: "..tostring(description)..")")
 		return
 	end
+	local fullID = "5.70." .. id
+	if EID.FullyAutomatedDescriptions[fullID] then
+		EID.FullyAutomatedDescriptions[fullID] = nil -- remove vanilla item id from the modular desc list, since it got overriden by this function.
+	end
 	EID:CreateDescriptionTableIfMissing("horsepills", language)
-	EID.descriptions[language].horsepills[id+1] = {id, itemName, description, EID._currentMod}
-	EID.ItemNames[language]["5.70." .. id] = itemName
+	EID.descriptions[language].horsepills[id + 1] = {id, itemName, description, EID._currentMod}
+	if itemName then
+		EID.ItemNames[language][fullID] = itemName
+	end
 end
 
 ---Adds a metadata for a pilleffect. Used for Placebo/False PHD
@@ -986,8 +1016,7 @@ function EID:getPillName(pillID, isHorsepill)
 	local moddedDesc = EID:getDescriptionEntry("custom", "5.70."..pillID)
 	local legacyModdedDescription = EID:getLegacyModDescription(5, 70, pillID)
 	local tableName = isHorsepill and "horsepills" or "pills"
-	local translatedName = EID.ItemNames[EID:getLanguage()]["5.70."..pillID]
-	local defaultDesc = translatedName or EID:getDescriptionEntry(tableName, pillID)
+	local defaultDesc = EID:getDescriptionEntry(tableName, pillID)
 
 	local name = moddedDesc or legacyModdedDescription or defaultDesc
 
@@ -995,10 +1024,16 @@ function EID:getPillName(pillID, isHorsepill)
 	if pillID == 9999 then
 		vanillaName = "Golden Pill" -- only used for languages that haven't defined a Golden Pill name
 	else
-		vanillaName = EID.itemConfig:GetPillEffect(pillID - 1).Name
+		if EID.itemConfig:GetPillEffect(pillID - 1) == nil then
+			return "<INVALID PILL ID>"
+		else
+			vanillaName = EID.itemConfig:GetPillEffect(pillID - 1).Name
+		end
 	end
-	name = name and name[2] or (not string.find(vanillaName, "^#") and vanillaName) or EID.descriptions[EID.DefaultLanguageCode][tableName][pillID][2] or vanillaName
+	local translatedName = EID.ItemNames[EID:getLanguage()]["5.70."..pillID-1]
+	name = name and name[2] or translatedName or (not string.find(vanillaName, "^#") and vanillaName) or EID.descriptions[EID.DefaultLanguageCode][tableName][pillID][2] or vanillaName
 	name = string.gsub(name,"I'm Excited!!!","I'm Excited!!") -- prevent markup trigger
+
 	return name
 end
 

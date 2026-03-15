@@ -525,6 +525,7 @@ EID.descriptions[languageCode].BookOfVirtuesWispTexts = {
 	-- The placeholder therefore can be used in all parts that make up the wisp descriptions
 	StatDescription = "{ringIcon}{{Wisp}} {amount}|{{Heart}} {health}|{{Damage}} {damage}",	-- {ringIcon} will be replaced with an icon representing the wisp movement, {amount} with the number of wisps, {health} with the HP, {damage} with the damage or the "CantShoot" text
 	Shotspeed = "{1}% Schussgeschwindigkeit", 				-- {1} will be replaced with the shot speed changes in %
+	Damage = "{1}% Schaden", 					-- {1} will be replaced with the damage changes in %
 	Chance = " ({1}% Chance)",					-- {1} will be replaced with the chance
 	SingleRoom = "Einzelraum-Wisp{plural_s}",
 	NoWisps = "Kein Wisp",
@@ -894,7 +895,7 @@ local repTrinkets={
 	[159] = {"159", "Vergoldeter Schlüssel", "{{Key}} +1 Schlüssel beim Aufsammeln#{{GoldenChest}} Ersetzt alle Truhen (außer Alt/Mega) durch goldene Truhen#{{GoldenChest}} Goldene Truhen können zusätzliche Karten, Pillen oder Trinkets enthalten"}, -- Gilded Key
 	[160] = {"160", "Glückssack", "{{GrabBag}} Das Betreten einer neuen Ebene lässt einen Sack erscheinen"}, -- Lucky Sack
 	[161] = {"161", "Böse Krone", "Erzeugt einen {{TreasureRoom}} Schatzraum und {{Shop}} Laden in Sheol"}, -- Wicked Crown
-	[162] = {"162", "Azazels Stumpf", "{{Player7}} Einen Raum leeren hat eine 50%ige Chance, den Spieler in Azazel zu verwandeln#{{Timer}} Der Effekt dauert an, bis ein anderer Raum geräumt und verlassen wird"}, -- Azazel's Stump
+	[162] = {"162", "Azazels Stumpf", "{{Player7}} Einen Raum leeren hat eine 33%ige Chance, den Spieler in Azazel zu verwandeln#{{Timer}} Der Effekt dauert an, bis ein anderer Raum geräumt und verlassen wird"}, -- Azazel's Stump
 	[163] = {"163", "Dingle Berry", "Alle Dip (kleine Kack-) Feinde sind freundlich#Das Leeren eines Raumes lässt einen zufälligen Dip erscheinen"}, -- Dingle Berry
 	[164] = {"164", "Ringkappe", "{{Bomb}} Erzeugt 1 zusätzliche Bombe für jede platzierte Bombe"}, -- Ring Cap
 	[165] = {"165", "Nuh Uh!", "Auf Womb und darüber hinaus ersetzt alle Münz- und Schlüsselspawns durch eine Bombe, ein Herz, eine Pille, eine Karte, ein Trinket, eine Batterie oder einen Feindflieger"}, -- Nuh Uh!

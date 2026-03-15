@@ -485,6 +485,7 @@ EID.descriptions[languageCode].BookOfVirtuesWispTexts = {
 	-- The placeholder therefore can be used in all parts that make up the wisp descriptions
 	StatDescription = "{ringIcon}{{Wisp}} {amount}|{{Heart}} {health}|{{Damage}} {damage}",	-- {ringIcon} will be replaced with an icon representing the wisp movement, {amount} with the number of wisps, {health} with the HP, {damage} with the damage or the "CantShoot" text
 	Shotspeed = "{1}% vel. de lágrimas", 			-- {1} will be replaced with the shot speed changes in %
+	Damage = "{1}% Daño", 					-- {1} will be replaced with the damage changes in %
 	Chance = " ({1}% de probabilidad)",					-- {1} will be replaced with the chance
 	SingleRoom = "Fuego de una sola habitación",
 	NoWisps = "No hay fuego",
@@ -931,7 +932,7 @@ local repTrinkets={
 	[159] = {"159", "Llave dorada", "{{Key}} +1 Llave al recoger#{{GoldenChest}} Reemplaza todos los cofres por cofres dorados (excepto mega cofres y cofres viejos)#{{GoldenChest}} Los cofres dorados pueden contener cartas, pildoras o trinkets extra"}, -- Gilded Key
 	[160] = {"160", "Bolsa de la suerte", "{{GrabBag}} Genera un saco al cambiar de piso"}, -- Lucky Sack
 	[161] = {"161", "Corona maldita", "Las {{Shop}} tiendas y {{TreasureRoom}} salas de tesoro aparecerán en Sheol"}, -- Wicked Crown
-	[162] = {"162", "Muñon de Azazel", "{{Player7}} 50% de probabilidad de convertirte en Azazel al limpiar una habitación#{{Timer}} El efecto dura hasta completar y salir de otra habitación"}, --  Azazel's Stump
+	[162] = {"162", "Muñon de Azazel", "{{Player7}} 33% de probabilidad de convertirte en Azazel al limpiar una habitación#{{Timer}} El efecto dura hasta completar y salir de otra habitación"}, --  Azazel's Stump
 	[163] = {"163", "Pedacito de popó", "Vuelve amistosas a todas las caquitas enemigas#Genera una caquita amistosa al limpiar una habitación"}, -- Dingle Berry
 	[164] = {"164", "Fulminantes", "{{Bomb}} Genera una bomba adicional por cada bomba colocada"}, -- Ring Cap
 	[165] = {"165", "¡Nah!", "Desde el Útero en adelante, cambia las monedas y llaves que se generan por una bomba, corazón, pildora, carta, trinket, batería, o mosca enemiga"}, -- Nuh Uh!
